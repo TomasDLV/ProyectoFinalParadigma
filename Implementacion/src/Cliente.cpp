@@ -8,7 +8,7 @@
 #include "Cliente.h"
 int Cliente::autonumerico = 0;
 
-Cliente::Cliente(string correo, string nombre, string contrasenia, Fecha fechaRegistro, string calle, int numero, int latitud, int longitud, string descripcion):Usuario(correo,nombre,contrasenia,fechaRegistro) {
+Cliente::Cliente(string correo, string nombre, string contrasenia, Fecha * fechaRegistro, string calle, int numero, int latitud, int longitud, string descripcion):Usuario(correo,nombre,contrasenia,fechaRegistro) {
 	autonumerico++;
 	this->idCliente = autonumerico;
 	pedidosCreados = 0;
@@ -23,8 +23,8 @@ void Cliente::ListarInfo() {
 	direccion->ListarDireccion();
 	cout<<""<<endl;
 }
-void Cliente::CrearPedido(Negocio * negocio,string comentario){
-	Pedido * pedido = new Pedido(pedidosCreados++);
+void Cliente::CrearPedido(Negocio * negocio,Cadete * cadeteEncargado,string comentario){
+	Pedido * pedido = new Pedido(pedidosCreados++,cadeteEncargado,negocio);
 	pedidos.push_back(pedido);
 }
 void Cliente::AgregarProductos(int idPedidoUnico, vector<Producto*> productos,vector<int> cantidades,Direccion * direcNegocio,Direccion * direcCliente){
@@ -39,7 +39,9 @@ void Cliente::AgregarProductos(int idPedidoUnico, vector<Producto*> productos,ve
 	        pedidoEncontrado->AgregarProducto(productos[i],cantidades[i]);
 	}
 	pedidoEncontrado->CalcularMontoTotal(direcCliente,direcNegocio);
-
+}
+void Cliente::EnviarPedidoANegocio(Pedido * pedido,Negocio * negocio){
+	negocio->AgregarPedido(pedido);
 }
 Cliente::~Cliente() {
 	// TODO Auto-generated destructor stub

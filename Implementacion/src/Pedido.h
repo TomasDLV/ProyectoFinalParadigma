@@ -8,24 +8,20 @@
 #include <vector>
 #include <cmath>
 using namespace std;
+
+
 #include "Fecha.h"
-
-
-#include "Direccion.h"
 #include "Usuario.h"
 #include "Cadete.h"
 #include "Cliente.h"
-#include "Negocio.h"
 #include "Producto.h"
+#include "Direccion.h"
+#include "Negocio.h"
 #include "DetalleProducto.h"
-
-
-
-
-
 
 #ifndef PEDIDO_H_
 #define PEDIDO_H_
+class Negocio;
 
 class Pedido {
 	static int autonumerico;
@@ -33,18 +29,20 @@ class Pedido {
 	int idPedidoUnico;
 	float precio;
 	string comentario;
-	Fecha fecha;
+	Fecha * fecha;
 	string estado;
-	Negocio negocio;
+	Negocio * negocio;
+	Cadete * cadete;
 	vector<DetalleProducto *> detallesProductos;
 	float CalcularDistancia(Direccion * direc1,Direccion * direct2);
 
 public:
-	Pedido();
-	Pedido(int IdPedido);
+	Pedido(int IdPedido,Cadete * cadeteEncargado,Negocio * negocioEncargado);
 	virtual ~Pedido();
 	float CalcularMontoTotal(Direccion * direcCliente,Direccion * direcNegocio);
 	void AgregarProducto(Producto * producto, int cantidad);
+	void SetEstado(string estado);
+	string GetEstado();
 	int GetIdPedidoUnico();
 };
 

@@ -8,6 +8,10 @@
 #include "Negocio.h"
 
 int Negocio::autonumerico = 0;
+Negocio::Negocio(){
+	direccion = nullptr;
+	codigo = -1;
+}
 
 Negocio::Negocio(string nombre,string calle, int numero, int latitud, int longitud, string descripcion) {
 	autonumerico++;
@@ -53,11 +57,34 @@ void Negocio::MostrarProductos() {
         cout << "-----------------------------" << endl;
     }
 }
-Direccion Negocio::GetDireccion(){
+Direccion * Negocio::GetDireccion(){
 	return direccion;
+}
+
+
+void Negocio::AgregarPedido(Pedido * pedido){
+	pedidos.push_back(pedido);
+	cout << "Pedido agregado con Exito." << endl;
+}
+void Negocio::QuitarPedido(Pedido *pedido){
+	if (pedidos.empty()) {
+			cout << "No hay pedidos para quitar." << endl;
+			return;
+	}
+	 // Buscar el pedido en el vector
+	for (auto it = pedidos.begin(); it != pedidos.end(); ++it) {
+		if ((*it)->GetIdPedidoUnico() == pedido->GetIdPedidoUnico()) {
+			// Eliminar el pedido encontrado del vector (sin liberar memoria)
+			it = pedidos.erase(it);
+			cout << "Pedido quitado con Exito." << endl;
+			return; // Salir del bucle una vez que se ha eliminado el pedido
+		}
+	}
+
+	// Si llegamos aqua, el pedido no se encuentra en el vector
+	cout << "Pedido no encontrado en el negocio." << endl;
 }
 
 Negocio::~Negocio() {
 	delete direccion;
 }
-

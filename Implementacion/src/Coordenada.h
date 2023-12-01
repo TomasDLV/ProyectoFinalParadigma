@@ -16,8 +16,8 @@ class Coordenada {
 public:
 	Coordenada(int latitud, int longitud);
 	virtual ~Coordenada();
-	int getLatitud();
-	int getLongitud();
+	int GetLatitud();
+	int GetLongitud();
 	void listarInformacion();
 };
 

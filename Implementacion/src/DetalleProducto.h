@@ -18,6 +18,7 @@ class DetalleProducto {
 public:
 	DetalleProducto();
 	DetalleProducto(Producto * producto,int cantidad);
+	float GetPrecio();
 	virtual ~DetalleProducto();
 };
 

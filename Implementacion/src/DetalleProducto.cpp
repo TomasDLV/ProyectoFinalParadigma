@@ -15,9 +15,11 @@ DetalleProducto::DetalleProducto() {
 DetalleProducto::DetalleProducto(Producto * producto,int cantidad){
 	this->producto = producto;
 	this->cantidad = cantidad;
-	this->precio = producto->precio * cantidad;
+	this->precio = producto->GetPrecio() * cantidad;
 }
 DetalleProducto::~DetalleProducto() {
 	// TODO Auto-generated destructor stub
 }
-
+float DetalleProducto::GetPrecio(){
+	return precio;
+}

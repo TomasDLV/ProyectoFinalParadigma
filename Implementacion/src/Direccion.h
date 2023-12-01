@@ -20,10 +20,10 @@ class Direccion {
 public:
 	Direccion(string calle, int numero, int latitud, int longitud, string descripcion);
 	virtual ~Direccion();
-	string getCalle();
-	int getNumero();
-	Coordenada* getCoordenada();
-	string getDescripcion();
+	string GetCalle();
+	int GetNumero();
+	Coordenada* GetCoordenada();
+	string GetDescripcion();
 	void ListarDireccion();
 };
 

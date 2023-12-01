@@ -11,7 +11,7 @@
 
 class Cadete : Usuario{
 public:
-	Cadete(string correo, string nombre, string contrasenia, Fecha fechaRegistro);
+	Cadete(string correo, string nombre, string contrasenia, Fecha * fechaRegistro);
 	void CambiarEstado();
 	void ListarInfo();
 	~Cadete();

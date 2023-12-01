@@ -18,10 +18,10 @@ Coordenada::~Coordenada() {
 	// TODO Auto-generated destructor stub
 }
 
-int Coordenada::getLatitud(){
+int Coordenada::GetLatitud(){
 	return latitud;
 }
-int Coordenada::getLongitud(){
+int Coordenada::GetLongitud(){
 	return longitud;
 }
 

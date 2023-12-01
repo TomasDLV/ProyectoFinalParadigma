@@ -7,7 +7,7 @@
 
 #include "Cadete.h"
 
-Cadete::Cadete(string correo, string nombre, string contrasenia, Fecha fechaRegistro):Usuario(correo,nombre,contrasenia,fechaRegistro) {
+Cadete::Cadete(string Correo, string Nombre, string Contrasenia, Fecha * FechaRegistro):Usuario(Correo,Nombre,Contrasenia,FechaRegistro) {
 	// TODO Auto-generated constructor stub
 }
 

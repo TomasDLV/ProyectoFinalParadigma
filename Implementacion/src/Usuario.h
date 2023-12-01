@@ -17,9 +17,9 @@ private:
 	string correo;
 	string nombre;
 	string contrasenia;
-	Fecha fechaRegistro;
+	Fecha * fechaRegistro;
 public:
-	Usuario(string correo, string nombre, string contrasenia, Fecha fechaRegistro);
+	Usuario(string Correo, string Nombre, string Contrasenia, Fecha * FechaRegistro);
 	void ListarInfo();
 	~Usuario();
 };

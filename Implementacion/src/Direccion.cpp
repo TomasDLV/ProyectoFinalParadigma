@@ -19,17 +19,17 @@ Direccion::~Direccion() {
 	delete coordenada;
 }
 
-string Direccion::getCalle(){
+string Direccion::GetCalle(){
 	return calle;
 }
 
-int Direccion::getNumero(){
+int Direccion::GetNumero(){
 	return numero;
 }
-Coordenada* Direccion::getCoordenada(){
+Coordenada* Direccion::GetCoordenada(){
 	return coordenada;
 }
-string Direccion::getDescripcion(){
+string Direccion::GetDescripcion(){
 	return descripcion;
 }
 
