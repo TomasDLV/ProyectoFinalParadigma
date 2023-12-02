@@ -7,7 +7,7 @@
 
 #include "Usuario.h"
 
-Usuario::Usuario(string correo, string nombre, string contrasenia, Fecha * fechaRegistro) {
+Usuario::Usuario(string correo, string nombre, string contrasenia,Fecha * fechaRegistro) {
 	this->correo = correo;
 	this->nombre = nombre;
 	this->contrasenia =  contrasenia;
@@ -22,6 +22,6 @@ void Usuario::ListarInfo() {
 }
 
 Usuario::~Usuario() {
-	// TODO Auto-generated destructor stub
+	delete fechaRegistro;
 }
 

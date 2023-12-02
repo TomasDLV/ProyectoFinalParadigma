@@ -27,15 +27,19 @@ private:
 	static int autonumerico;
 	vector <Pedido *> pedidos;
 public:
-	Cliente(string correo, string nombre, string contrasenia, Fecha * fechaRegistro,string calle, int numero, int latitud, int longitud, string descripcion);
+	Cliente(string correo, string nombre, string contrasenia,string calle, int numero, int latitud, int longitud, string descripcion);
 	~Cliente();
 
 	void ListarInfo();
 	void CrearPedido(Negocio * negocio,Cadete * cadeteEncargado,string comentario);
 	void AgregarProductos(int idPedidoUnico, vector<Producto*> productos,vector<int> cantidades,Direccion * direcNegocio,Direccion * direcCliente);
 	void EnviarPedidoANegocio(Pedido * pedido , Negocio * negocio);
-	//void CancelarPedido();
-
+	void CancelarPedido(int idPedido);
+	Direccion * GetDireccion();
+	void EliminarPedido(int id);
+	int GetId();
+	int GetPedidosCreados(){return pedidosCreados;};
+	Pedido * GetPedidoPorId(int idPedido);
 
 };
 

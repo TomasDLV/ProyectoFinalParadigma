@@ -8,24 +8,31 @@
 using namespace std;
 
 #include "Pedido.h"
+
 #include "Negocio.h"
+#include "Cadete.h"
 
 int Pedido::autonumerico = 0;
 
 Pedido::Pedido(int IdPedido,Cadete * cadeteEncargado,Negocio * negocioEncargado){
 	autonumerico++;
-	idPedido = IdPedido++;
+	idPedido = IdPedido;
 	idPedidoUnico = autonumerico;
 	cadete = cadeteEncargado;
 	precio = 0;
 	fecha = new Fecha();
-	estado = "Pendiente de Aceptacion";
+	estado = "PendienteDeAceptacion";
 	negocio = negocioEncargado;
 }
 
 Pedido::~Pedido() {
-	// TODO Auto-generated destructor stub
+    // Liberar memoria de la lista de DetalleProducto
+    for (DetalleProducto* detalle : detallesProductos) {
+        delete detalle;
+    }
+    detallesProductos.clear();
 }
+
 void Pedido::AgregarProducto(Producto * producto, int cantidad){
 	DetalleProducto * detalleProducto = new DetalleProducto(producto,cantidad);
 	detallesProductos.push_back(detalleProducto);
@@ -67,7 +74,13 @@ void Pedido::SetEstado(string estado){
 string Pedido::GetEstado(){
 	return estado;
 }
+
 int Pedido::GetIdPedidoUnico(){
 	return idPedidoUnico;
 }
-
+int Pedido::GetId(){ // Es lo mismo que IdPedidoUnico pero sirve para usarlo con la funcion generica BuscarElementoEn Lista
+	return idPedidoUnico;
+}
+int Pedido::GetIdPedido(){
+	return idPedido;
+}

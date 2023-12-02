@@ -12,7 +12,6 @@ using namespace std;
 
 #include "Fecha.h"
 #include "Usuario.h"
-#include "Cadete.h"
 #include "Cliente.h"
 #include "Producto.h"
 #include "Direccion.h"
@@ -22,6 +21,7 @@ using namespace std;
 #ifndef PEDIDO_H_
 #define PEDIDO_H_
 class Negocio;
+class Cadete;
 
 class Pedido {
 	static int autonumerico;
@@ -44,6 +44,8 @@ public:
 	void SetEstado(string estado);
 	string GetEstado();
 	int GetIdPedidoUnico();
+	int GetId();
+	int GetIdPedido();
 };
 
 #endif /* PEDIDO_H_ */

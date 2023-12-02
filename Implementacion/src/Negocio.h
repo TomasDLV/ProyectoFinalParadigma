@@ -18,7 +18,7 @@ using namespace std;
 
 class Negocio {
 	static int autonumerico;
-	int codigo;
+	int idNegocio;
 	string nombre;
 	vector<Producto*> productos;
 	Direccion * direccion;
@@ -33,6 +33,9 @@ public:
 	void MostrarProductos();
 	void AgregarPedido(Pedido * pedido);
 	void QuitarPedido(Pedido *pedido);
+	void AceptarPedido(int IdPedidoUnico);
+	void RechazarPedido(int IdPedidoUnico);
+	int GetId();
 	virtual ~Negocio();
 };
 

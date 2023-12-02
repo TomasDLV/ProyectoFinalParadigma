@@ -12,7 +12,7 @@ using namespace std;
 
 class Producto {
 	static int autonumerico;
-	int codigo;
+	int idProducto;
 	string nombre;
 	string descripcion;
 	float precio;
@@ -20,7 +20,7 @@ class Producto {
 public:
 	Producto(string nombre,string descripcion,float precio);
 	float GetPrecio(){return precio;};
-	int GetCodigo(){return codigo;};
+	int GetIdProducto(){return idProducto;};
 	void MostrarProducto();
 	virtual ~Producto();
 };

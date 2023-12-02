@@ -10,15 +10,18 @@
 int Negocio::autonumerico = 0;
 Negocio::Negocio(){
 	direccion = nullptr;
-	codigo = -1;
+	idNegocio = -1;
 }
 
 Negocio::Negocio(string nombre,string calle, int numero, int latitud, int longitud, string descripcion) {
 	autonumerico++;
 	Direccion *direccion = new Direccion(calle,numero,latitud,longitud,descripcion);
 	this->nombre = nombre;
-	this->codigo = autonumerico;
+	this->idNegocio = autonumerico;
 	this->direccion = direccion;
+}
+Negocio::~Negocio() {
+	delete direccion;
 }
 
 void Negocio::AgregarProducto(Producto* producto) {
@@ -33,7 +36,7 @@ void Negocio::QuitarProducto(Producto* producto){
 	}
 	 // Buscar el producto en el vector
 	for (auto it = productos.begin(); it != productos.end(); ++it) {
-		if ((*it)->GetCodigo() == producto->GetCodigo()) {
+		if ((*it)->GetIdProducto() == producto->GetIdProducto()) {
 			// Eliminar el producto encontrado del vector (sin liberar memoria)
 			it = productos.erase(it);
 			cout << "Producto quitado con éxito." << endl;
@@ -84,7 +87,22 @@ void Negocio::QuitarPedido(Pedido *pedido){
 	// Si llegamos aqua, el pedido no se encuentra en el vector
 	cout << "Pedido no encontrado en el negocio." << endl;
 }
+int Negocio::GetId(){
+	return idNegocio;
+}
 
-Negocio::~Negocio() {
-	delete direccion;
+void Negocio::AceptarPedido(int idPedidoUnico){
+	for(Pedido * p : pedidos){
+		if(p->GetIdPedidoUnico() == idPedidoUnico){
+			p->SetEstado("EnPreparacion");
+		}
+	}
+}
+void Negocio::RechazarPedido(int idPedidoUnico){
+	for(Pedido * p : pedidos){
+		if(p->GetIdPedidoUnico() == idPedidoUnico){
+			p->SetEstado("Rechazado");
+			QuitarPedido(p);
+		}
+	}
 }

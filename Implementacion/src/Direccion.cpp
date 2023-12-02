@@ -33,6 +33,7 @@ string Direccion::GetDescripcion(){
 	return descripcion;
 }
 
+
 void Direccion::ListarDireccion(){
 	cout<<"*Direccion*"<<endl;
 	cout<<"->Calle: "<< calle<<"\n";
