@@ -25,7 +25,7 @@ class Cadete;
 
 class Pedido {
 	static int autonumerico;
-	int idPedido;
+	int idPedidoLocal;
 	int idPedidoUnico;
 	float precio;
 	string comentario;
@@ -37,15 +37,14 @@ class Pedido {
 	float CalcularDistancia(Direccion * direc1,Direccion * direct2);
 
 public:
-	Pedido(int IdPedido,Cadete * cadeteEncargado,Negocio * negocioEncargado);
+	Pedido(int idPedidoLocal,Cadete * cadeteEncargado,Negocio * negocioEncargado);
 	virtual ~Pedido();
 	float CalcularMontoTotal(Direccion * direcCliente,Direccion * direcNegocio);
 	void AgregarProducto(Producto * producto, int cantidad);
 	void SetEstado(string estado);
 	string GetEstado();
-	int GetIdPedidoUnico();
-	int GetId();
-	int GetIdPedido();
+	int GetId();//retorna IdPedidoUnico
+	int GetIdPedidoLocal();//retorna IdPedidoLocal
 };
 
 #endif /* PEDIDO_H_ */

@@ -48,7 +48,7 @@ public:
 	//Funciones que puede realizar un Cliente:
 	void ClienteCancelarPedido(int idCliente,int idPedido);
 	void ClienteCrearPedido(int idCliente,int idNegocio,vector<Producto*>productos,vector<int>cantidades,string comentario);
-
+	void ClienteAgregarProducto(int idCliente,int idPedidoLocal,Producto * producto, int cantidad);
 	//Funciones que puede realizar un Negocio:
 	void NegocioAceptarPedido(int idPedido, int idNegocio);
 	void NegocioRechazarPedido(int idPedido, int idNegocio);

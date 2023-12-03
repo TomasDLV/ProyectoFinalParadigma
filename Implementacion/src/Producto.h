@@ -21,6 +21,7 @@ public:
 	Producto(string nombre,string descripcion,float precio);
 	float GetPrecio(){return precio;};
 	int GetIdProducto(){return idProducto;};
+	string GetNombre(){return nombre;};
 	void MostrarProducto();
 	virtual ~Producto();
 };

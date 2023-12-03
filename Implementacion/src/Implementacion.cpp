@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : Implementacion.cpp
-// Author      : 
+// Author      :
 // Version     :
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
@@ -77,6 +77,8 @@ int main() {
 	app.CadeteRetirarPedido(1,1);
 	app.CadeteRetirarPedido(1,2);
 	app.CadeteRetirarPedido(1,3);
+
+
 
     delete producto1;
     delete producto2;

@@ -14,6 +14,7 @@ Cliente::Cliente(string correo, string nombre, string contrasenia, string calle,
 	pedidosCreados = 0;
 	Direccion* newDireccion = new Direccion(calle, numero, latitud, longitud, descripcion);
 	this->direccion = newDireccion;
+
 }
 
 void Cliente::ListarInfo() {
@@ -27,12 +28,13 @@ void Cliente::CrearPedido(Negocio * negocio,Cadete * cadeteEncargado,string come
 	pedidosCreados +=1;
 	Pedido * pedido = new Pedido(pedidosCreados,cadeteEncargado,negocio);
 	pedidos.push_back(pedido);
+	 cout << "Pedido creado por el cliente " << GetNombre() << " con ID único: " << pedido->GetId() << endl;
 }
 void Cliente::AgregarProductos(int idPedidoUnico, vector<Producto*> productos,vector<int> cantidades,Direccion * direcNegocio,Direccion * direcCliente){
 	int cantProductos = productos.size();
 	Pedido * pedidoEncontrado;
 	for(Pedido * p : pedidos){
-		if(p->GetIdPedidoUnico()== idPedidoUnico){
+		if(p->GetId()== idPedidoUnico){
 			 pedidoEncontrado = p;
 		}
 	}
@@ -47,19 +49,25 @@ void Cliente::EnviarPedidoANegocio(Pedido * pedido,Negocio * negocio){
 int Cliente::GetId(){
 	return idCliente;
 }
-void Cliente::CancelarPedido(int idPedido){
-	for(Pedido * p : pedidos){
-		if (p->GetIdPedido() == idPedido){
-			if (p->GetEstado() == "EnPreparacion"){
-				EliminarPedido(idPedido);
-			}
-		}
+void Cliente::CancelarPedido(int idPedidoLocal){
+	for(Pedido* p : pedidos){
+		if (p->GetIdPedidoLocal() == idPedidoLocal){
+	    	if (p->GetEstado() == "EnPreparacion"){
+	        	EliminarPedido(idPedidoLocal);
+	         	cout << "Pedido con ID local: " << idPedidoLocal << " cancelado con éxito." << endl;
+	        	return;
+	        } else {
+	         	cout << "No se puede cancelar el pedido con ID local: " << idPedidoLocal << ". No está en estado 'EnPreparacion'." << endl;
+	            return;
+	            }
+	    }
 	}
+	cout << "Pedido con ID local: " << idPedidoLocal << " no encontrado para cancelar." << endl;
 }
 void Cliente::EliminarPedido(int id){
 	auto iter = pedidos.begin();
 	    while (iter != pedidos.end()) {
-	        if ((*iter)->GetIdPedido() == id) {
+	        if ((*iter)->GetIdPedidoLocal() == id) {
 	            delete *iter; // Liberar memoria del pedido
 	            iter = pedidos.erase(iter); // Eliminar el puntero al pedido de la lista
 	            return;
@@ -74,7 +82,7 @@ Direccion * Cliente::GetDireccion(){
 }
 Pedido * Cliente::GetPedidoPorId(int idPedido){
 	for(Pedido * p : pedidos){
-		if(idPedido == p->GetIdPedido()){
+		if(idPedido == p->GetIdPedidoLocal()){
 			return p;
 		}
 	}

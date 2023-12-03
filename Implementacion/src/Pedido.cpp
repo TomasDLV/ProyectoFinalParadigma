@@ -6,17 +6,17 @@
  */
 #include <iostream>
 using namespace std;
-
+#include "Cadete.h"
 #include "Pedido.h"
 
 #include "Negocio.h"
-#include "Cadete.h"
+
 
 int Pedido::autonumerico = 0;
 
-Pedido::Pedido(int IdPedido,Cadete * cadeteEncargado,Negocio * negocioEncargado){
+Pedido::Pedido(int idPedidoLocal,Cadete * cadeteEncargado,Negocio * negocioEncargado){
 	autonumerico++;
-	idPedido = IdPedido;
+	this->idPedidoLocal = idPedidoLocal;
 	idPedidoUnico = autonumerico;
 	cadete = cadeteEncargado;
 	precio = 0;
@@ -36,7 +36,7 @@ Pedido::~Pedido() {
 void Pedido::AgregarProducto(Producto * producto, int cantidad){
 	DetalleProducto * detalleProducto = new DetalleProducto(producto,cantidad);
 	detallesProductos.push_back(detalleProducto);
-
+    cout << cantidad << " unidades del producto '" << producto->GetNombre() << "' agregadas al pedido." << endl;
 }
 float Pedido::CalcularDistancia(Direccion *direc1, Direccion *direc2) {
 
@@ -66,21 +66,22 @@ float Pedido::CalcularMontoTotal(Direccion * direcCliente,Direccion * direcNegoc
 		precio += distancia;
 	}
 	precio *= 1.05;
+	cout << "El monto total del pedido es: " << precio << " unidades monetarias." << endl;
+
 	return precio;
 }
-void Pedido::SetEstado(string estado){
-	this->estado= estado;
+void Pedido::SetEstado(string nuevoEstado){
+    estado = nuevoEstado;
+    cout << "Estado del Pedido #" << idPedidoUnico << " cambiado a: " << nuevoEstado << endl;
 }
 string Pedido::GetEstado(){
 	return estado;
 }
 
-int Pedido::GetIdPedidoUnico(){
+
+int Pedido::GetId(){
 	return idPedidoUnico;
 }
-int Pedido::GetId(){ // Es lo mismo que IdPedidoUnico pero sirve para usarlo con la funcion generica BuscarElementoEn Lista
-	return idPedidoUnico;
-}
-int Pedido::GetIdPedido(){
-	return idPedido;
+int Pedido::GetIdPedidoLocal(){
+	return idPedidoLocal;
 }

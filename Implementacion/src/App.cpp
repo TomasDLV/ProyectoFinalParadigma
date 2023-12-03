@@ -41,7 +41,7 @@ void App::ClienteCrearPedido(int idCliente,int idNegocio,vector<Producto*>produc
 		Cadete * cadeteDesignado = ElegirCadeteRandom();
 		clienteEncontrado->CrearPedido(negocioEncontrado,cadeteDesignado,comentario);
 		Pedido * pedidoCreado = clienteEncontrado->GetPedidoPorId(clienteEncontrado->GetPedidosCreados());
-		clienteEncontrado->AgregarProductos(pedidoCreado->GetIdPedidoUnico(),productos,cantidades,negocioEncontrado->GetDireccion(),clienteEncontrado->GetDireccion());
+		clienteEncontrado->AgregarProductos(pedidoCreado->GetId(),productos,cantidades,negocioEncontrado->GetDireccion(),clienteEncontrado->GetDireccion());
 		cadeteDesignado->AgregarPedidoDesignado(pedidoCreado);
 		negocioEncontrado->AgregarPedido(pedidoCreado);
 }
@@ -55,6 +55,9 @@ void App::ClienteCancelarPedido(int idCliente,int idPedido){
 void App::CrearNegocio(string nombre,string calle, int numero, int latitud, int longitud, string descripcion){
 	Negocio *nuevo = new Negocio(nombre,calle,numero,latitud,longitud,descripcion);
 	negocios.push_back(nuevo);
+	cout << "Negocio creado exitosamente." << endl;
+	cout << "Nombre: " << nombre << ", ID: " << nuevo->GetId() << endl;
+
 }
 Cadete * App::ElegirCadeteRandom(){
 	srand(static_cast<unsigned int>(time(nullptr)));
@@ -66,11 +69,16 @@ Cadete * App::ElegirCadeteRandom(){
 void App::CrearCadete(string correo, string nombre, string contrasenia){
 	Cadete *nuevo = new Cadete(correo,nombre,contrasenia);
 	cadetes.push_back(nuevo);
+    cout << "Cadete creado exitosamente." << endl;
+    cout << "Nombre: " << nombre << ", Correo: " << correo << ", ID: " << nuevo->GetId() << endl;
+
 }
 
 void App::CrearCliente(string correo, string nombre, string contrasenia,string calle, int numero, int latitud, int longitud, string descripcion){
 	Cliente *nuevo = new Cliente(correo,nombre,contrasenia,calle,numero,latitud,longitud,descripcion);
 	clientes.push_back(nuevo);
+	cout << "Cliente creado exitosamente." << endl;
+	cout << "Nombre: " << nombre << ", Correo: " << correo << ", ID: " << nuevo->GetId() << endl;
 }
 
 //Funciones que puede realizar un Negocio:
@@ -102,4 +110,12 @@ void App::CadeteEntregarPedido(int idPedido,int idCadete){
 void App::CadeteRetirarPedido(int idPedido,int idCadete){
 	Cadete * cadeteEncontrado = BuscarElementoEnLista(idCadete, cadetes);
 	cadeteEncontrado->RetirarPedido(idPedido);
+}
+void App::ClienteAgregarProducto(int idCliente,int idPedidoLocal,Producto * producto, int cantidad){
+	Cliente * clienteEncontrado = BuscarElementoEnLista(idCliente,clientes);
+	Pedido * pedidoEncontrado = clienteEncontrado->GetPedidoPorId(idPedidoLocal);
+	if(pedidoEncontrado->GetEstado()== "EnPreparacion" || pedidoEncontrado->GetEstado()== "PendienteDeAceptacion" ){
+		pedidoEncontrado->AgregarProducto(producto,cantidad);
+		return;
+	}
 }

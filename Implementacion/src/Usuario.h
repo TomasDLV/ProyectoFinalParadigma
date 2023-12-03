@@ -13,14 +13,17 @@ using namespace std;
 
 #include "Fecha.h"
 class Usuario {
-private:
+protected:
 	string correo;
 	string nombre;
 	string contrasenia;
+private:
+
 	Fecha * fechaRegistro;
 public:
 	Usuario(string Correo, string Nombre, string Contrasenia,Fecha * fechaRegistro);
 	void ListarInfo();
+	string GetNombre(){return nombre;};
 	~Usuario();
 };
 

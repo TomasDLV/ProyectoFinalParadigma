@@ -34,12 +34,12 @@ public:
 	void CrearPedido(Negocio * negocio,Cadete * cadeteEncargado,string comentario);
 	void AgregarProductos(int idPedidoUnico, vector<Producto*> productos,vector<int> cantidades,Direccion * direcNegocio,Direccion * direcCliente);
 	void EnviarPedidoANegocio(Pedido * pedido , Negocio * negocio);
-	void CancelarPedido(int idPedido);
+	void CancelarPedido(int idPedidoLocal);
 	Direccion * GetDireccion();
 	void EliminarPedido(int id);
 	int GetId();
 	int GetPedidosCreados(){return pedidosCreados;};
-	Pedido * GetPedidoPorId(int idPedido);
+	Pedido * GetPedidoPorId(int idPedidoLocal);
 
 };
 

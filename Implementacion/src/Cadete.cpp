@@ -32,21 +32,26 @@ int Cadete::GetId(){
 	return idCadete;
 }
 void Cadete::RetirarPedido(int IdPedidoUnico){
-	for(Pedido* p : pedidosDesignados){
-		if(p->GetIdPedidoUnico()== IdPedidoUnico){
-			p->SetEstado("EnCamino");
-			return;
-		}
-	}
+    for(Pedido* p : pedidosDesignados){
+        if(p->GetId() == IdPedidoUnico){
+            p->SetEstado("EnCamino");
+            cout << "Pedido con ID único: " << IdPedidoUnico << " retirado por el cadete '" << nombre << "'." << endl;
+            return;
+        }
+    }
+    cout << "Pedido con ID único: " << IdPedidoUnico << " no asignado al cadete '" << nombre << "'." << endl;
 }
 void Cadete::EntregarPedido(int IdPedidoUnico){
-	for(Pedido* p : pedidosDesignados){
-			if(p->GetIdPedidoUnico()== IdPedidoUnico){
-				p->SetEstado("Entregado");
-				return;
-			}
-		}
+    for(Pedido* p : pedidosDesignados){
+        if(p->GetId() == IdPedidoUnico){
+            p->SetEstado("Entregado");
+            cout << "Pedido con ID único: " << IdPedidoUnico << " entregado por el cadete '" << nombre << "'." << endl;
+            return;
+        }
+    }
+    cout << "Pedido con ID único: " << IdPedidoUnico << " no asignado al cadete '" << nombre << "'." << endl;
 }
 void Cadete::AgregarPedidoDesignado(Pedido * pedido){
-	pedidosDesignados.push_back(pedido);
+    pedidosDesignados.push_back(pedido);
+    cout << "Pedido con ID: " << pedido->GetId() << " asignado al cadete '" << nombre << "' con éxito." << endl;
 }

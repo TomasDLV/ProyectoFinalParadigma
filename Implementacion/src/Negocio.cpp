@@ -27,13 +27,14 @@ Negocio::~Negocio() {
 void Negocio::AgregarProducto(Producto* producto) {
     productos.push_back(producto);
     cout << "Producto agregado con éxito." << endl;
+    cout << "Producto '" << producto->GetNombre() << "' agregado al negocio '" << nombre << "' con éxito." << endl;
 }
 
 void Negocio::QuitarProducto(Producto* producto){
-	if (productos.empty()) {
-		cout << "No hay productos para quitar." << endl;
-		return;
-	}
+    if (productos.empty()) {
+        cout << "No hay productos para quitar en el negocio '" << nombre << "'." << endl;
+        return;
+    }
 	 // Buscar el producto en el vector
 	for (auto it = productos.begin(); it != productos.end(); ++it) {
 		if ((*it)->GetIdProducto() == producto->GetIdProducto()) {
@@ -76,7 +77,7 @@ void Negocio::QuitarPedido(Pedido *pedido){
 	}
 	 // Buscar el pedido en el vector
 	for (auto it = pedidos.begin(); it != pedidos.end(); ++it) {
-		if ((*it)->GetIdPedidoUnico() == pedido->GetIdPedidoUnico()) {
+		if ((*it)->GetId() == pedido->GetId()) {
 			// Eliminar el pedido encontrado del vector (sin liberar memoria)
 			it = pedidos.erase(it);
 			cout << "Pedido quitado con Exito." << endl;
@@ -91,18 +92,24 @@ int Negocio::GetId(){
 	return idNegocio;
 }
 
-void Negocio::AceptarPedido(int idPedidoUnico){
-	for(Pedido * p : pedidos){
-		if(p->GetIdPedidoUnico() == idPedidoUnico){
-			p->SetEstado("EnPreparacion");
-		}
-	}
+void Negocio::AceptarPedido(int idPedido){
+    for(Pedido * p : pedidos){
+        if(p->GetId() == idPedido){
+            p->SetEstado("EnPreparacion");
+            cout << "Pedido con ID: " << idPedido << " en el negocio '" << nombre << "' aceptado y en preparación." << endl;
+            return;
+        }
+    }
+    cout << "Pedido con ID: " << idPedido << " no encontrado en el negocio '" << nombre << "'." << endl;
 }
 void Negocio::RechazarPedido(int idPedidoUnico){
-	for(Pedido * p : pedidos){
-		if(p->GetIdPedidoUnico() == idPedidoUnico){
-			p->SetEstado("Rechazado");
-			QuitarPedido(p);
-		}
-	}
+    for(Pedido * p : pedidos){
+        if(p->GetId() == idPedidoUnico){
+            p->SetEstado("Rechazado");
+            QuitarPedido(p);
+            cout << "Pedido con ID único: " << idPedidoUnico << " en el negocio '" << nombre << "' rechazado y quitado del listado." << endl;
+            return;
+        }
+    }
+    cout << "Pedido con ID único: " << idPedidoUnico << " no encontrado en el negocio '" << nombre << "'." << endl;
 }
